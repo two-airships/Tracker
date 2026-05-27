@@ -1,0 +1,12 @@
+# ignore the virtual environment
+.tracker
+
+# Ignore Python cache files and environment variables
+__pycache__/
+*.pyc
+.env
+.DS_Store
+*.egg-info/
+
+# Don't leak my webhook
+utils/webhook.py

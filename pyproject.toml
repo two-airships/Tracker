@@ -1,0 +1,15 @@
+[project]
+name = "player-tracker"
+version = "0.1.1"
+description = "MLB live tracker for Japanese players"
+requires-python = ">=3.10"
+
+dependencies = [
+    "requests"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
