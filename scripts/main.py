@@ -2,7 +2,8 @@ import time
 
 from detection.at_bat_detector import (
     AtBatDetector,
-    get_current_batter
+    get_current_batter,
+    get_on_deck_batter
 )
 
 from mlb.api import get_schedule
@@ -59,20 +60,17 @@ def run_tracker():
 
                 # 6. Get current batter
                 batter = get_current_batter(live_data)
+                on_deck = get_on_deck_batter(live_data)
 
-                if batter is None:
-                    continue
+                if batter is not None:
+                    player = detector.process(game_pk, batter)
+                    if player:
+                        notifier.send(f"🔥 {player['name']} is now batting!")
 
-                # 7. Detect tracked player
-                player = detector.process(
-                    game_pk,
-                    batter
-                )
-
-                if player:
-                    notifier.send(
-                        f"🔥 {player['name']} is now batting!"
-                    )
+                if on_deck is not None:                  # NEW
+                    player = detector.process_on_deck(game_pk, on_deck)
+                    if player:
+                        notifier.send(f"👀 {player['name']} is on deck!")
 
         except Exception as e:
             print(f"Error occurred: {e}")
