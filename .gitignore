@@ -9,4 +9,4 @@ __pycache__/
 *.egg-info/
 
 # Don't leak my webhook
-utils/webhook.py
+scripts/webhook.py
