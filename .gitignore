@@ -8,5 +8,5 @@ __pycache__/
 .DS_Store
 *.egg-info/
 
-# Don't leak my webhook
+# Don't leak my webhook 
 scripts/webhook.py
