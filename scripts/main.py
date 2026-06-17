@@ -35,19 +35,19 @@ def run_tracker():
 
     while True:
         try:
-            # 1. Get today's schedule
+            # Get today's schedule
             schedule = get_schedule()
 
-            # 2. Parse games
+            # Parse games
             games = get_game_details(schedule)
 
-            # 3. Filter games involving tracked teams
+            # Filter games involving tracked teams
             filtered_games = filter_games_by_teams(
                 games,
                 tracked_teams
             )
 
-            # 4. Process every live game
+            # Process live games
             for game in filtered_games:
 
                 if not is_game_live(game):
@@ -55,10 +55,10 @@ def run_tracker():
 
                 game_pk = game["gamePK"]
 
-                # 5. Fetch live data
+                # Get live data
                 live_data = get_live_game_data(game_pk)
 
-                # 6. Get current batter
+                # Get current batter
                 batter = get_current_batter(live_data)
                 on_deck = get_on_deck_batter(live_data)
 
@@ -67,7 +67,7 @@ def run_tracker():
                     if player:
                         notifier.send(f"🔥 {player['name']} is now batting!")
 
-                if on_deck is not None:                  # NEW
+                if on_deck is not None:
                     player = detector.process_on_deck(game_pk, on_deck)
                     if player:
                         notifier.send(f"👀 {player['name']} is on deck!")
