@@ -1,5 +1,3 @@
-*In progress, waiting for raspberry pi to get here
-
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
